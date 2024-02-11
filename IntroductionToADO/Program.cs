@@ -13,7 +13,7 @@ namespace IntroductionToADO
     {
         static void Main(string[] args)
         {
-            string connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LiberyPD212;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LibraryPD212;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             SqlConnection connection = new SqlConnection(connection_string); // создаем соединения с сервером при создании оно не активно
             connection.Open(); // открываем соединения, поскольку оно не автоматическое, и не открывает
             // вставка 
@@ -25,7 +25,8 @@ namespace IntroductionToADO
             //cmd.ExecuteNonQuery();  // - этот метод для команд Insert, Upgate, Delete
 
             // выборка 
-            string select_string = @"Select * From Authors";
+            //string select_string = @"Select * From Authors";
+            string select_string = @"Select * From Books";
             cmd.CommandText = select_string;
             
             SqlDataReader rdl =  cmd.ExecuteReader();
@@ -33,8 +34,6 @@ namespace IntroductionToADO
             {
                 Console.WriteLine($"{rdl[0]} {rdl[1]} {rdl[2]}");
             }
-
-
             connection.Close(); // соединения нужно закрывать 
         }
     }
