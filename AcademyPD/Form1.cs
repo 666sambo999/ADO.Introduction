@@ -30,7 +30,7 @@ namespace AcademyPD
             SelectStudents();
             LoadDirectionToComboBox();
             rbStud.Checked = true;
-
+            LoadDataToComboBox(cbDirectTab, "Directions", "direction_name", "Выбирете направления");
         }
         //void LoadTablesToComboBox()
         //{
@@ -220,6 +220,81 @@ namespace AcademyPD
             {
                 cbDirection_SelectedIndexChanged(sender, e);
             }
+        }
+        public void LoadDataToComboBox(System.Windows.Forms.ComboBox comboBox, 
+            string sourceTable, string sourceColumn, 
+            string invate = "Выберете значение")
+        {
+            string commandLine = $@"SELECT {sourceColumn} FROM {sourceTable}";
+            SqlCommand cmd = new SqlCommand(commandLine, connection);
+            //cmd.Connection = connection;
+            //cmd.Parameters.Add("@table_name", sourceTable);
+            //cmd.Parameters.Add("@column_name", sourceColumn);
+            //cmd.CommandText = @"SELECT @column_name FROM @table_name";
+            connection.Open();
+            reader = cmd.ExecuteReader();
+            comboBox.Items.Add(invate);
+            while(reader.Read())
+            {
+                comboBox.Items.Add(reader[0]);
+            }
+            reader.Close();
+            connection.Close();
+            comboBox.SelectedItem = invate;
+
+        }
+        public void SelectedFromTable(System.Windows.Forms.DataGridView  dataGridView,
+            //string tableName, params string[] columns
+            string commandLine)
+        {
+            //SqlCommand cmd = new SqlCommand();
+            //cmd.Connection = connection;
+            //cmd.CommandText = "SELECT ";
+            //for(int i = 0; i<columns.Length; i++)
+            //{
+            //    cmd.Parameters.Add($"{columns [i]}", columns [i]);
+            //    cmd.CommandText += $"{columns[i]}";
+            //    cmd.CommandText += i == columns.Length - 1 ? " " : ", ";
+            //}
+            //cmd.CommandText += $"FROM {tableName}";
+            SqlCommand cmd = new SqlCommand(commandLine, connection);
+            connection.Open();
+            reader = cmd.ExecuteReader();
+            table = new DataTable();
+            for(int i =0; i<reader.FieldCount; i++)
+            {
+                table.Columns.Add(reader.GetName(i));
+            }
+            while(reader.Read())
+            {
+                DataRow row = table.NewRow();
+                for(int i =0; i<reader.FieldCount; i++) 
+                {  
+                    row[i] = reader[i]; 
+                }
+                table.Rows.Add(row);
+            }
+            dataGridView.DataSource = table;
+            reader.Close();
+            connection.Close();
+        }
+
+        private void cbDirectTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //SelectedFromTable(dataGridView1, "Groups", "group_name", "direction");
+            string commandLine = $@"SELECT group_name, direction_name 
+            FROM Groups JOIN Directions ON direction=direction_id
+            ";
+            if(cbDirectTab.SelectedIndex !=0)
+                commandLine+= $@"WHERE direction_name= '{cbDirectTab.SelectedItem}'";
+            
+            SelectedFromTable(dataGridView1, commandLine);
+            lbGroupCount.Text = $"Количество групп: {dataGridView1.RowCount -1}";
+        }
+
+        private void tabPGroups_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
