@@ -289,12 +289,25 @@ namespace AcademyPD
                 commandLine+= $@"WHERE direction_name= '{cbDirectTab.SelectedItem}'";
             
             SelectedFromTable(dataGridView1, commandLine);
-            lbGroupCount.Text = $"Количество групп: {dataGridView1.RowCount -1}";
+            lbGroupCount.Text = $"Количество групп: {dataGridView1.RowCount - 1}";
         }
 
-        private void tabPGroups_Click(object sender, EventArgs e)
-        {
+        //private void tabPGroups_Click(object sender, EventArgs e)
+        //{
+            
+        //}
 
+        private void buttonAddGroup_Click(object sender, EventArgs e)
+        {
+            AddGroups add = new AddGroups();
+            LoadDataToComboBox(add.CBDirections, "Directions", "direction_name", "Выбирете направления обучения");
+            LoadDataToComboBox(add.CbForm, "LearningForms", "form_name", "выбирите форму обучения");
+            LoadDataToComboBox(add.CbTime, "LearningTime", "time_name", "выбирите время обучения");
+            DialogResult result = add.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+
+            }
         }
     }
 }

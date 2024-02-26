@@ -38,11 +38,11 @@
             this.dgwStudents = new System.Windows.Forms.DataGridView();
             this.cbGroup = new System.Windows.Forms.ComboBox();
             this.tabPGroups = new System.Windows.Forms.TabPage();
+            this.lbGroupCount = new System.Windows.Forms.Label();
             this.cbDirectTab = new System.Windows.Forms.ComboBox();
             this.buttonAddGroup = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPageTeacher = new System.Windows.Forms.TabPage();
-            this.lbGroupCount = new System.Windows.Forms.Label();
             this.tabGroups.SuspendLayout();
             this.tabPageStudent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwStudents)).BeginInit();
@@ -170,7 +170,16 @@
             this.tabPGroups.TabIndex = 2;
             this.tabPGroups.Text = "Группы";
             this.tabPGroups.UseVisualStyleBackColor = true;
-            this.tabPGroups.Click += new System.EventHandler(this.tabPGroups_Click);
+            //this.tabPGroups.Click += new System.EventHandler(this.tabPGroups_Click);
+            // 
+            // lbGroupCount
+            // 
+            this.lbGroupCount.AutoSize = true;
+            this.lbGroupCount.Location = new System.Drawing.Point(357, 33);
+            this.lbGroupCount.Name = "lbGroupCount";
+            this.lbGroupCount.Size = new System.Drawing.Size(65, 13);
+            this.lbGroupCount.TabIndex = 3;
+            this.lbGroupCount.Text = "количество";
             // 
             // cbDirectTab
             // 
@@ -189,6 +198,7 @@
             this.buttonAddGroup.TabIndex = 1;
             this.buttonAddGroup.Text = "Добавить";
             this.buttonAddGroup.UseVisualStyleBackColor = true;
+            this.buttonAddGroup.Click += new System.EventHandler(this.buttonAddGroup_Click);
             // 
             // dataGridView1
             // 
@@ -207,15 +217,6 @@
             this.tabPageTeacher.TabIndex = 1;
             this.tabPageTeacher.Text = "Преподаватели";
             this.tabPageTeacher.UseVisualStyleBackColor = true;
-            // 
-            // lbGroupCount
-            // 
-            this.lbGroupCount.AutoSize = true;
-            this.lbGroupCount.Location = new System.Drawing.Point(357, 33);
-            this.lbGroupCount.Name = "lbGroupCount";
-            this.lbGroupCount.Size = new System.Drawing.Size(65, 13);
-            this.lbGroupCount.TabIndex = 3;
-            this.lbGroupCount.Text = "количество";
             // 
             // Form1
             // 
